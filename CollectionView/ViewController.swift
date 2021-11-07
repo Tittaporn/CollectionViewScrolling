@@ -76,8 +76,6 @@ class ViewController: UIViewController {
     }//end func
     
     @objc private func loadData() {
-        //        fetchTrendingMedia()
-        //        fetchUpcomingMedia()
         self.trendingMoviePage = 1
         self.trendingTVPage = 1
         dispatchGroup.notify(queue: .main) {
@@ -105,8 +103,6 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
             return trendingMovies.count
         case Section.trendingTV.rawValue:
             return trendingTV.count
-        //        case Section.upcomingMovies.rawValue:
-        //            return upcomingMovies.count
         default:
             return 0
         }
@@ -123,7 +119,6 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
             else {return UICollectionViewCell()}
             cell.setup(media: trendingMovies[indexPath.row], indexPath: indexPath)
             return cell
-            
         case Section.trendingTV.rawValue:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "trendingTVCell", for: indexPath) as? MediaCollectionViewCell
             else {return UICollectionViewCell()}
