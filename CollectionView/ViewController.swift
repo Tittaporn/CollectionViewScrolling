@@ -8,7 +8,6 @@
 import UIKit
 
 class ViewController: UIViewController {
-    
     // MARK: - Sections and Categories
     private enum Section: Int, CaseIterable {
         case trendingMovies
@@ -48,8 +47,6 @@ class ViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        //        fetchTrendingMedia()
-        //        fetchUpcomingMedia()
         setupRefresher()
         dispatchGroup.notify(queue: .main) {
             self.setupCollectionView()
@@ -102,23 +99,6 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
         return Section.allCases.count
     }//end func
     
-    //    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-    //        guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "header", for: indexPath) as? SectionHeader else {return UICollectionReusableView()}
-    //        
-    //        switch indexPath.section {
-    //        case Section.trendingMovies.rawValue:
-    //            header.setup(label: "#TrendingMovies")
-    //        case Section.trendingTV.rawValue:
-    //            header.setup(label: "#TrendingShows")
-    ////        case Section.upcomingMovies.rawValue:
-    ////            header.setup(label: "Upcoming Movies")
-    //        default:
-    //            break
-    //        }
-    //        
-    //        return header
-    //    }//end func
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch section {
         case Section.trendingMovies.rawValue:
@@ -133,68 +113,25 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
     }//end func
     
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
-        //        for indexPath in indexPaths {
-        //            switch indexPath.section {
-        //            case Section.trendingMovies.rawValue:
-        //                print(trendingMovies.count)
         
-        // ImageService().fetchImage(.poster(trendingTV[indexPath.row].posterPath ?? "")) {(_) in}
-        //            case Section.upcomingMovies.rawValue:
-        //            //    ImageService().fetchImage(.poster(upcomingMovies[indexPath.row].posterPath ?? "")) {(_) in}
-        //            default:
-        //                break
-        //            }
-        // }
     }//end func
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         switch indexPath.section {
         case Section.trendingMovies.rawValue:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "trendingMovieCell", for: indexPath) as? MediaCollectionViewCell
             else {return UICollectionViewCell()}
-            //            if indexPath.row > trendingMovies.count - 6 && !isFetchingMore && trendingMoviePage < totalPages {
-            //                self.isFetchingMore = true
-            //                self.fetchMore(category: Category.trending.rawValue, mediaType: MediaType.movie.rawValue, page: trendingMoviePage + 1)
-            //            }
             cell.setup(media: trendingMovies[indexPath.row], indexPath: indexPath)
             return cell
             
         case Section.trendingTV.rawValue:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "trendingTVCell", for: indexPath) as? MediaCollectionViewCell
             else {return UICollectionViewCell()}
-            //            if indexPath.row > trendingTV.count - 6 && !isFetchingMore && trendingTVPage < totalPages {
-            //                self.isFetchingMore = true
-            //                self.fetchMore(category: Category.trending.rawValue, mediaType: MediaType.tv.rawValue, page: trendingTVPage + 1)
-            //            }
             cell.setup(media: trendingTV[indexPath.row], indexPath: indexPath)
             return cell
-            
-        //        case Section.upcomingMovies.rawValue:
-        //            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "upcomingCell", for: indexPath) as? MediaCollectionViewCell
-        //            else {return UICollectionViewCell()}
-        //            cell.setup(media: upcomingMovies[indexPath.row], indexPath: indexPath)
-        //            return cell
-        
         default:
             return UICollectionViewCell()
         }
     }//end func
-    
-    //    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    //        switch indexPath.section {
-    //        case Section.trendingMovies.rawValue:
-    //           // presentDetailVC(media: trendingMovies[indexPath.row])
-    //
-    //        case Section.trendingTV.rawValue:
-    //          //  presentDetailVC(media: trendingTV[indexPath.row])
-    //
-    //        case Section.upcomingMovies.rawValue:
-    //          //  presentDetailVC(media: upcomingMovies[indexPath.row])
-    //
-    //        default:
-    //            break
-    //        }
-    //    }
 }//end extension
 
